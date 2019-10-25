@@ -19,6 +19,8 @@ add_executable(mpags-cipher
     edited_mpags-cipher.cpp
     MPAGSCipher/TransformChar.cpp
     MPAGSCipher/TransformChar.hpp
+    MPAGSCipher/ProcessCommandLine.cpp
+    MPAGSCipher/ProcessCommandLine.hpp
     )
 
 # - Don't allow C++ Compiler Vendor Extensions
