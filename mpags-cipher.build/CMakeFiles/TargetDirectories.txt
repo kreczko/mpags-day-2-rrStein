@@ -1,3 +1,0 @@
-/Users/qw19176/Documents/Courses/cpp/mpags-day-2-rrStein/mpags-cipher.build/CMakeFiles/rebuild_cache.dir
-/Users/qw19176/Documents/Courses/cpp/mpags-day-2-rrStein/mpags-cipher.build/CMakeFiles/edit_cache.dir
-/Users/qw19176/Documents/Courses/cpp/mpags-day-2-rrStein/mpags-cipher.build/CMakeFiles/mpags-cipher.dir
