@@ -28,58 +28,60 @@ std::string transformChar(const char in_char){
     // continue;
   }
 
-  // std::string digits[10] = {"ZERO","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT","NINE"};
+  std::vector<std::string> digits{"ZERO","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT","NINE"};
 
-  // std::map <char, std::string> my_map;
-  // my_map['0'] = "ZERO";
-  // my_map['1'] = "ONE";
-  // my_map['2'] = "TWO";
-  // my_map['3'] = "THREE";
-  // my_map['4'] = "FOUR";
-  // my_map['5'] = "FIVE";
-  // my_map['6'] = "SIX";
-  // my_map['7'] = "SEVEN";
-  // my_map['8'] = "EIGHT";
-  // my_map['9'] = "NINE";
+  std::map <char, std::string> my_map = {
+      {'0', "ZERO"}
+  };
 
-  // std::map <char, std::string>::iterator it;
-  // it = my_map.find(in_char);
-  // inputText += my_map[in_char];
+  my_map['1'] = "ONE";
+  my_map['2'] = "TWO";
+  my_map['3'] = "THREE";
+  my_map['4'] = "FOUR";
+  my_map['5'] = "FIVE";
+  my_map['6'] = "SIX";
+  my_map['7'] = "SEVEN";
+  my_map['8'] = "EIGHT";
+  my_map['9'] = "NINE";
 
-  // Transliterate digits to English words
-  switch (in_char)
-  {
-  case '0':
-    inputText += "ZERO";
-    break;
-  case '1':
-    inputText += "ONE";
-    break;
-  case '2':
-    inputText += "TWO";
-    break;
-  case '3':
-    inputText += "THREE";
-    break;
-  case '4':
-    inputText += "FOUR";
-    break;
-  case '5':
-    inputText += "FIVE";
-    break;
-  case '6':
-    inputText += "SIX";
-    break;
-  case '7':
-    inputText += "SEVEN";
-    break;
-  case '8':
-    inputText += "EIGHT";
-    break;
-  case '9':
-    inputText += "NINE";
-    break;
-  }
+  std::map <char, std::string>::iterator it;
+  it = my_map.find(in_char);
+  inputText += my_map[in_char];
+
+//   // Transliterate digits to English words
+//   switch (in_char)
+//   {
+//   case '0':
+//     inputText += "ZERO";
+//     break;
+//   case '1':
+//     inputText += "ONE";
+//     break;
+//   case '2':
+//     inputText += "TWO";
+//     break;
+//   case '3':
+//     inputText += "THREE";
+//     break;
+//   case '4':
+//     inputText += "FOUR";
+//     break;
+//   case '5':
+//     inputText += "FIVE";
+//     break;
+//   case '6':
+//     inputText += "SIX";
+//     break;
+//   case '7':
+//     inputText += "SEVEN";
+//     break;
+//   case '8':
+//     inputText += "EIGHT";
+//     break;
+//   case '9':
+//     inputText += "NINE";
+//     break;
+//   }
 
   return inputText;
 }
@@ -148,7 +150,7 @@ bool processCommandLine(
     return 1;
   }
 }
-// std::tuple<bool, bool> rtup = {helpRequested, versionRequested};
+// std::make_tuple<bool, bool> rtup = {helpRequested, versionRequested};
 
 return 0;
   }
@@ -160,8 +162,8 @@ int main(int argc, char *argv[])
   const std::vector<std::string> cmdLineArgs {argv, argv+argc};
 
   // Add a typedef that assigns another name for the given type for clarity
-  typedef std::vector<std::string>::size_type size_type;
-  const size_type nCmdLineArgs {cmdLineArgs.size()};
+//   typedef std::vector<std::string>::size_type size_type;
+//   const size_type nCmdLineArgs {cmdLineArgs.size()};
 
   // Options that might be set by the command-line arguments
   bool helpRequested {false};
@@ -172,48 +174,6 @@ int main(int argc, char *argv[])
   // Process command line arguments - ignore zeroth element, as we know this to
   // be the program name and don't need to worry about it
   // for (size_type i {1}; i < nCmdLineArgs; ++i) {
-
-  //   if (cmdLineArgs[i] == "-h" || cmdLineArgs[i] == "--help") {
-  //     helpRequested = true;
-  //   }
-  //   else if (cmdLineArgs[i] == "--version") {
-  //     versionRequested = true;
-  //   }
-  //   else if (cmdLineArgs[i] == "-i") {
-  //     // Handle input file option
-  //     // Next element is filename unless -i is the last argument
-  //     if (i == nCmdLineArgs-1) {
-	// std::cerr << "[error] -i requires a filename argument" << std::endl;
-	// // exit main with non-zero return to indicate failure
-	// return 1;
-  //     }
-  //     else {
-	// // Got filename, so assign value and advance past it
-	// inputFile = cmdLineArgs[i+1];
-	// ++i;
-  //     }
-  //   }
-  //   else if (cmdLineArgs[i] == "-o") {
-  //     // Handle output file option
-  //     // Next element is filename unless -o is the last argument
-  //     if (i == nCmdLineArgs-1) {
-	// std::cerr << "[error] -o requires a filename argument" << std::endl;
-	// // exit main with non-zero return to indicate failure
-	// return 1;
-  //     }
-  //     else {
-	// // Got filename, so assign value and advance past it
-	// outputFile = cmdLineArgs[i+1];
-	// ++i;
-  //     }
-  //   }
-  //   else {
-  //     // Have an unknown flag to output error message and return non-zero
-  //     // exit status to indicate failure
-  //     std::cerr << "[error] unknown argument '" << cmdLineArgs[i] << "'\n";
-  //     return 1;
-  //   }
-  // }
 
   processCommandLine(cmdLineArgs,helpRequested,versionRequested,inputFile,outputFile);
 
@@ -260,46 +220,7 @@ int main(int argc, char *argv[])
   while(std::cin >> inputChar)
   {
     inputText += transformChar(inputChar);
-  //   // Uppercase alphabetic characters
-  //   if (std::isalpha(inputChar)) {
-  //     inputText += std::toupper(inputChar);
-  //     continue;
-  //   }
-
-  //   // Transliterate digits to English words
-  //   switch (inputChar) {
-  //     case '0':
-	// inputText += "ZERO";
-	// break;
-  //     case '1':
-	// inputText += "ONE";
-	// break;
-  //     case '2':
-	// inputText += "TWO";
-	// break;
-  //     case '3':
-	// inputText += "THREE";
-	// break;
-  //     case '4':
-	// inputText += "FOUR";
-	// break;
-  //     case '5':
-	// inputText += "FIVE";
-	// break;
-  //     case '6':
-	// inputText += "SIX";
-	// break;
-  //     case '7':
-	// inputText += "SEVEN";
-	// break;
-  //     case '8':
-	// inputText += "EIGHT";
-	// break;
-  //     case '9':
-	// inputText += "NINE";
-	// break;
-  //   }
-
+    std::cout << "Enter more letters or press Ctrl + D to exit" <<std::endl;
     // If the character isn't alphabetic or numeric, DONT add it.
     // Our ciphers can only operate on alphabetic characters.
   }
