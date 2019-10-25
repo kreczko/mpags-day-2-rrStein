@@ -9,6 +9,8 @@ bool processCommandLine(
     bool &helpRequested,
     bool &versionRequested,
     std::string &inputFileName,
-    std::string &outputFileName);
+    std::string &outputFileName,
+    std::string &method,
+    int &CaesarKey);
 
 #endif //MPAGSCIPHER_PROCESSCOMMANDLINE_HPP

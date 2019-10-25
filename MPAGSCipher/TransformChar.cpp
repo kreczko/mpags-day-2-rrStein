@@ -7,14 +7,15 @@ std::string transformChar(const char in_char)
 
     std::string inputText{""};
 
-    // Uppercase alphabetic characters
+    // Convert to uppercase alphabetic characters
     if (std::isalpha(in_char))
     {
         inputText = std::toupper(in_char);
-    }
+    } 
+    
+    //std::vector<std::string> digits{"ZERO","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT","NINE"};
 
-    //   std::vector<std::string> digits{"ZERO","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT","NINE"};
-
+    // Map input numbers to their corresponding words
     std::map<char, std::string> my_map = {
         {'0', "ZERO"}};
 
@@ -27,10 +28,11 @@ std::string transformChar(const char in_char)
     my_map['7'] = "SEVEN";
     my_map['8'] = "EIGHT";
     my_map['9'] = "NINE";
-
-    //   std::map <char, std::string>::iterator it;
-    //   it = my_map.find(in_char);
+    
     inputText += my_map[in_char];
+
+    // If the character isn't alphabetic or numeric or space, DONT add it.
+    // Our ciphers can only operate on alphabetic characters.
 
     return inputText;
 }

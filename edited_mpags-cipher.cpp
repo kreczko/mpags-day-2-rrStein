@@ -4,29 +4,28 @@
 #include <vector>
 #include <map>
 #include <fstream>
-
-// For std::isalpha and std::isupper
 #include <cctype>
+
 #include "TransformChar.hpp"
 #include "ProcessCommandLine.hpp"
+#include "RunCaesarCipher.hpp"
 
 // Main function of the mpags-cipher program
 int main(int argc, char *argv[])
 {
-    // Convert the command-line arguments into a more easily usable form
-  const std::vector<std::string> cmdLineArgs {argv, argv+argc};
+// Convert the command-line arguments into a more easily usable form
+  const std::vector<std::string> cmdLineArgs {argv,argv+argc};
 
-    // Options that might be set by the command-line arguments
+// Options that might be set by the command-line arguments
   bool helpRequested {false};
   bool versionRequested {false};
   std::string inputFile {""};
   std::string outputFile {""};
+  std::string method {""};
+  int CaesarKey;
 
-  // Process command line arguments - ignore zeroth element, as we know this to
-  // be the program name and don't need to worry about it
-  // for (size_type i {1}; i < nCmdLineArgs; ++i) {
-
-  processCommandLine(cmdLineArgs,helpRequested,versionRequested,inputFile,outputFile);
+// Process command line arguments with the corresponding function
+  processCommandLine(cmdLineArgs,helpRequested,versionRequested,inputFile,outputFile,method,CaesarKey);
 
   // Handle help, if requested
   if (helpRequested) {
@@ -40,7 +39,9 @@ int main(int argc, char *argv[])
       << "  -i FILE          Read text to be processed from FILE\n"
       << "                   Stdin will be used if not supplied\n\n"
       << "  -o FILE          Write processed text to FILE\n"
-      << "                   Stdout will be used if not supplied\n\n";
+      << "                   Stdout will be used if not supplied\n\n"
+      << "  -m Method        Specify method: encrypt or decrypt\n\n"
+      << "  -key             Key (integer) used for the Caesar cipher, default is 5\n\n";
     // Help requires no further action, so return from main
     // with 0 used to indicate success
     return 0;
@@ -59,14 +60,9 @@ int main(int argc, char *argv[])
   std::string inputText {""};
 
   bool ok_to_read = false;
-  // Read in user input from stdin/file
-  // Warn that input file option not yet implemented
-  if (!inputFile.empty()) {
-    // std::cout << "[warning] input from file ('"
-    //           << inputFile
-    //           << "') not implemented yet, using stdin\n";
 
-    // std::string name = inputFile;
+  // Read in user input from stdin/file
+  if (!inputFile.empty()) {
 
     std::ifstream in_file {inputFile};
 
@@ -83,43 +79,81 @@ int main(int argc, char *argv[])
 
     //   in_file >> inputChar;
       while (in_file >> inputChar){
-          std::cout << inputChar << std::endl;
+        //   std::cout << inputChar << std::endl;
           inputText += transformChar(inputChar);
       }
   }
     else {
 
-  std::cout << "Enter some characters to transform and press ENTER:" << std::endl;
+// If no file is input, revert to taking user input from keyboard
+  std::cout << "Enter some characters to transform and press ENTER: \n" << std::endl;
 
   while(std::cin >> inputChar)
   {
     inputText += transformChar(inputChar);
-    std::cout << "Enter more letters or press Ctrl + D to exit" <<std::endl;
-    // If the character isn't alphabetic or numeric, DONT add it.
-    // Our ciphers can only operate on alphabetic characters.
+    std::cout << "Enter another letter or press Ctrl + D to exit" <<std::endl;
   }
   }
-  // Output the transliterated text
-  // Warn that output file option not yet implemented
-  if (!outputFile.empty()) {
-    std::cout << "Writing transformed text into file: "
-              << outputFile
-              ;
+
+// Initialise variables for the cipher output
+  std::string encryption{""};
+  std::string decryption{""};
+
+// If no method is specified, notify user and proceed to output transliterated text
+  if (!method.empty())
+  {
+      if (method == "encrypt")
+      {
+        encryption = runCaesarCipher(inputText, CaesarKey, method);
+        std::cout << "The input text is: \n" 
+        << inputText
+        << "\nThe encrypted string is: \n" 
+        << encryption 
+        << "\n"
+        << std::endl;
+
+      } else if (method == "decrypt") {
+
+        decryption = runCaesarCipher(inputText, CaesarKey, method);
+        std::cout << "The input text is: \n"
+        << inputText 
+        << "\nThe decrypted string is: \n" 
+        << decryption 
+        << "\n"
+        << std::endl;
+      }
+  } else {
+      std::cout << "No encryption/decryption method passed\n"
+      << std::endl;
+  }
+
+// Output the encrypted, decrypted, or transliterated text depending on input arguments
+  if (!outputFile.empty())
+    {
+    std::cout << "Writing transformed text into file: \n"
+            << outputFile << std::endl;
     std::string name{outputFile};
     std::ofstream out_file{name};
     bool ok_to_write = out_file.good();
 
-    if(ok_to_write){
-        out_file << inputText;
+    if (ok_to_write)
+    {
+        if (method == "encrypt"){
+            out_file << encryption;
+        } else if (method == "decrypt"){
+            out_file << decryption;
+        } else {
+            out_file << inputText;
+        }
         std::cout << "Write successful" << std::endl;
-    } else {
-    std::cout << "WARNING: text output unsuccesful, out file not ok to write."
     }
-  }
+    else
+    {
+        std::cout << "WARNING: text output unsuccesful, out file not ok to write." << std::endl;
+    }
+    }
 
-  std::cout << inputText << std::endl;
-
-  // No requirement to return from main, but we do so for clarity
-  // and for consistency with other functions
-  return 0;
+// No requirement to return from main, but we do so for clarity
+// and for consistency with other functions
+      return 0;
 }
