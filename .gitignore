@@ -38,3 +38,4 @@
 # Build folders, etc.
 *.build
 *.build/
+*.build/*
