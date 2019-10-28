@@ -28,6 +28,11 @@ classical ciphers, it is transliterated using the following rules:
 
 The results of this transliteration are output after CTRL-D.
 
+The encoding/decoding in this program is done based on the Caesar cipher. To use this functionality,
+the method (-m) and key (-key) arguments are required. Pass either "encode" or "decode" to the method argument
+for corresponding action and the cipher key to the key argument. If no key is passed then a default 
+of key = 5 is used for the cipher.
+
 
 # Source Code Layout
 Under this directory, the code and associated files are organised as
