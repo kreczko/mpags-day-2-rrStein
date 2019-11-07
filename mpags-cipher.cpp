@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
   std::string inputFile {""};
   std::string outputFile {""};
   std::string method {""};
-  int CaesarKey;
+  int CaesarKey{5};
 
 // Process command line arguments with the corresponding function
   processCommandLine(cmdLineArgs,helpRequested,versionRequested,inputFile,outputFile,method,CaesarKey);
