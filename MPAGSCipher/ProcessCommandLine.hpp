@@ -11,6 +11,6 @@ bool processCommandLine(
     std::string &inputFileName,
     std::string &outputFileName,
     std::string &method,
-    int &CaesarKey);
+    int &caesarKey);
 
 #endif //MPAGSCIPHER_PROCESSCOMMANDLINE_HPP

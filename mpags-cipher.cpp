@@ -22,10 +22,10 @@ int main(int argc, char *argv[])
   std::string inputFile {""};
   std::string outputFile {""};
   std::string method {""};
-  int CaesarKey{5};
+  int caesarKey{5};
 
 // Process command line arguments with the corresponding function
-  processCommandLine(cmdLineArgs,helpRequested,versionRequested,inputFile,outputFile,method,CaesarKey);
+  processCommandLine(cmdLineArgs,helpRequested,versionRequested,inputFile,outputFile,method,caesarKey);
 
   // Handle help, if requested
   if (helpRequested) {
@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
   {
       if (method == "encrypt")
       {
-        encryption = runCaesarCipher(inputText, CaesarKey, method);
+        encryption = runCaesarCipher(inputText, caesarKey, method);
         std::cout << "The input text is: \n" 
         << inputText
         << "\nThe encrypted string is: \n" 
@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
 
       } else if (method == "decrypt") {
 
-        decryption = runCaesarCipher(inputText, CaesarKey, method);
+        decryption = runCaesarCipher(inputText, caesarKey, method);
         std::cout << "The input text is: \n"
         << inputText 
         << "\nThe decrypted string is: \n" 

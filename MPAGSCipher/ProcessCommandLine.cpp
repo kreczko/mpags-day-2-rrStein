@@ -14,7 +14,7 @@ bool processCommandLine(
     std::string &inputFileName,
     std::string &outputFileName,
     std::string &method,
-    int &CaesarKey
+    int &caesarKey
     )
 {
 
@@ -93,10 +93,10 @@ bool processCommandLine(
             }
             else if (x> 26 || x < 1) {
                 std::cout << "[Warning] -key argument out of bounds, defaulting to key = 5\n" << std::endl;
-                CaesarKey = 5;
+                caesarKey = 5;
                 ++i;
             } else {
-                CaesarKey = x;
+                caesarKey = x;
                 ++i;
             }
          } else
