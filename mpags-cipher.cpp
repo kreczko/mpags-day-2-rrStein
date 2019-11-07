@@ -18,14 +18,14 @@ int main(int argc, char *argv[]) {
   // Options that might be set by the command-line arguments
   bool helpRequested{false};
   bool versionRequested{false};
-  std::string inputFile{""};
-  std::string outputFile{""};
+  std::string inputFileName{""};
+  std::string outputFileName{""};
   std::string method{""};
   int caesarKey{5};
 
   // Process command line arguments with the corresponding function
-  processCommandLine(cmdLineArgs, helpRequested, versionRequested, inputFile,
-                     outputFile, method, caesarKey);
+  processCommandLine(cmdLineArgs, helpRequested, versionRequested, inputFileName,
+                     outputFileName, method, caesarKey);
 
   // Handle help, if requested
   if (helpRequested) {
@@ -63,9 +63,9 @@ int main(int argc, char *argv[]) {
   bool ok_to_read = false;
 
   // Read in user input from stdin/file
-  if (!inputFile.empty()) {
+  if (!inputFileName.empty()) {
 
-    std::ifstream in_file{inputFile};
+    std::ifstream in_file{inputFileName};
 
     ok_to_read = in_file.good();
   }
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
   // Loop over each character from user input
   // (until Return then CTRL-D (EOF) pressed)
   if (ok_to_read) {
-    std::string name = inputFile;
+    std::string name = inputFileName;
 
     std::ifstream in_file{name};
 
@@ -122,11 +122,10 @@ int main(int argc, char *argv[]) {
 
   // Output the encrypted, decrypted, or transliterated text depending on input
   // arguments
-  if (!outputFile.empty()) {
+  if (!outputFileName.empty()) {
     std::cout << "Writing transformed text into file: \n"
-              << outputFile << std::endl;
-    std::string name{outputFile};
-    std::ofstream out_file{name};
+              << outputFileName << std::endl;
+    std::ofstream out_file{outputFileName};
     bool ok_to_write = out_file.good();
 
     if (ok_to_write) {
