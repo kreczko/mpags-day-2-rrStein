@@ -6,8 +6,8 @@
 
 std::string runCaesarCipher(const std::string &text, const int &key,
                             const std::string &method) {
-  std::string result = "";
-  int len = text.size();
+  std::string result{""};
+  int len{text.size()};
   int s{key};
 
   // "Reverse" the key if decryption is requested
