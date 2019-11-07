@@ -96,25 +96,24 @@ int main(int argc, char *argv[]) {
   }
 
   // Initialise variables for the cipher output
-  std::string encryption{""};
-  std::string decryption{""};
+  std::string outputString{""};
 
   // If no method is specified, notify user and proceed to output transliterated
   // text
   if (!method.empty()) {
     if (method == "encrypt") {
-      encryption = runCaesarCipher(inputText, caesarKey, method);
+      outputString = runCaesarCipher(inputText, caesarKey, method);
       std::cout << "The input text is: \n"
                 << inputText << "\nThe encrypted string is: \n"
-                << encryption << "\n"
+                << outputString << "\n"
                 << std::endl;
 
     } else if (method == "decrypt") {
 
-      decryption = runCaesarCipher(inputText, caesarKey, method);
+      outputString = runCaesarCipher(inputText, caesarKey, method);
       std::cout << "The input text is: \n"
                 << inputText << "\nThe decrypted string is: \n"
-                << decryption << "\n"
+                << outputString << "\n"
                 << std::endl;
     }
   } else {
@@ -131,10 +130,8 @@ int main(int argc, char *argv[]) {
     bool ok_to_write = out_file.good();
 
     if (ok_to_write) {
-      if (method == "encrypt") {
-        out_file << encryption;
-      } else if (method == "decrypt") {
-        out_file << decryption;
+      if (method == "encrypt" || method == "decrypt") {
+        out_file << outputString;
       } else {
         out_file << inputText;
       }
