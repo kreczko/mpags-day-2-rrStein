@@ -16,7 +16,7 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # - Declare the build of mpags-cipher main program
 add_executable(mpags-cipher 
-    edited_mpags-cipher.cpp
+    mpags-cipher.cpp
     MPAGSCipher/TransformChar.cpp
     MPAGSCipher/TransformChar.hpp
     MPAGSCipher/ProcessCommandLine.cpp
