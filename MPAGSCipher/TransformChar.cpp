@@ -2,6 +2,7 @@
 #include <iostream>
 #include <map>
 
+
 std::string transformChar(const char in_char) {
 
   std::string inputText{""};
@@ -15,7 +16,7 @@ std::string transformChar(const char in_char) {
   // digits{"ZERO","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT","NINE"};
 
   // Map input numbers to their corresponding words
-  const std::map<char, std::string> my_map = {
+  static const std::map<char, std::string> kLookupMap = {
     {'0', "ZERO"},
     {'1', "ONE"},
     {'2', "TWO"},
@@ -28,7 +29,8 @@ std::string transformChar(const char in_char) {
     {'9', "NINE"},
   };
 
-  inputText += my_map.at(in_char);
+  if(std::isdigit(in_char))
+    inputText += kLookupMap.at(in_char);
 
   // If the character isn't alphabetic or numeric or space, DONT add it.
   // Our ciphers can only operate on alphabetic characters.
